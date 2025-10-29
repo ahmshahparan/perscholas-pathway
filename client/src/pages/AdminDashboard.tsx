@@ -525,7 +525,23 @@ export default function AdminDashboard() {
                       defaultValue={editingCourse.certificationsBadges || ""}
                     />
                   </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="edit-domainId">Domain</Label>
+                    <Select name="domainId" defaultValue={editingCourse.domainId?.toString()} required>
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {domains?.map((domain: any) => (
+                          <SelectItem key={domain.id} value={domain.id.toString()}>
+                            {domain.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
                   
+
                   {/* Job Roles Section */}
                   <div className="space-y-4 border-t pt-4">
                     <div className="flex items-center justify-between">
