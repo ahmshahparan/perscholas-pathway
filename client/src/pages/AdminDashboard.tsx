@@ -525,6 +525,7 @@ export default function AdminDashboard() {
                       defaultValue={editingCourse.certificationsBadges || ""}
                     />
                   </div>
+                  
                   <div className="space-y-2">
                     <Label htmlFor="edit-domainId">Domain</Label>
                     <Select name="domainId" defaultValue={editingCourse.domainId?.toString()} required>
@@ -541,7 +542,6 @@ export default function AdminDashboard() {
                     </Select>
                   </div>
                   
-
                   {/* Job Roles Section */}
                   <div className="space-y-4 border-t pt-4">
                     <div className="flex items-center justify-between">
@@ -764,20 +764,22 @@ export default function AdminDashboard() {
                             </form>
                           </DialogContent>
                         </Dialog>
-                        <Button 
-                          variant="destructive" 
-                          size="sm"
-                          onClick={() => {
-                            if (confirm(`Are you sure you want to delete "${role.title}"?`)) {
-                              deleteJobRoleMutation.mutate({
-                                token: token!,
-                                id: role.id,
-                              });
-                            }
-                          }}
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
+                        {isGlobalAdmin && (
+                          <Button 
+                            variant="destructive" 
+                            size="sm"
+                            onClick={() => {
+                              if (confirm(`Are you sure you want to delete "${role.title}"?`)) {
+                                deleteJobRoleMutation.mutate({
+                                  token: token!,
+                                  id: role.id,
+                                });
+                              }
+                            }}
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        )}
                       </div>
                     </div>
                   ))}
